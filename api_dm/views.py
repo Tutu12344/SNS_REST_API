@@ -9,7 +9,7 @@ from rest_framework.response import Response
 
 
 class MessageViewSet(viewsets.ModelViewSet):
-    queryset = Message.objects().all()
+    queryset = Message.objects.all()
     serializer_class = serializer.MessageSerializer
     authentication_classes = (authentication.TokenAuthentication)
     permission_classes = (permissions.IsAuthenticated,)

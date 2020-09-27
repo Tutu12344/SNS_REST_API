@@ -10,7 +10,7 @@ class FriendsFilter(serializers.PrimaryKeyRelatedField):
         list_friend = []
         for friend in friends:
             list_friend.append(friends.askFrom.id)
-
+        # Usersの中に含まれるidを抽出しreceiverに渡す
         queryset = User.object.filter(id__in=list_friend)
         return queryset
 

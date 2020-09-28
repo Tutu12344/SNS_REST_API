@@ -76,6 +76,7 @@ const ApiContextProvider = (props) => {
   }, [token, profile.id]);
 
   const createProfile = async () => {
+    //サーバにデータ送るためにkeyとdataを指定して行う
     const createData = new FormData();
     createData.append("nickname", editedProfile.nickName);
     cover.name && createData.append("img", cover, cover.name);

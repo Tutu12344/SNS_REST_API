@@ -86,7 +86,7 @@ const loginReducer = (state, action) => {
     case INPUT_EDIT: {
       return {
         ...state,
-        [aciton.inputName]: action.payload,
+        [action.inputName]: action.payload,
       };
     }
     case TOGGLE_MODE: {
@@ -99,9 +99,70 @@ const loginReducer = (state, action) => {
       return state;
   }
 };
-const Login = () => {
+const Login = (props) => {
   const classes = useStyles();
+  const [state, dispatch] = useReducer(loginReducer, initialState);
+  const inputChangedLog = () => (event) => {
+    const cred = state.credentialLog;
+    cred[event.target.name] = event.target.value;
+    dispatch({
+      type: INPUT_EDIT,
+      inputName: "state.credentialLog",
+      payload: cred,
+    });
+  };
+  const inputChangedReg = () => (event) => {
+    const cred = state.credentialReg;
+    cred[event.target.name] = event.target.value;
+    dispatch({
+      type: INPUT_EDIT,
+      inputName: "state.credentialReg",
+      payload: cred,
+    });
+  };
 
+  const login = async (event) => {
+    // submit時にrefreshを防ぐ
+    event.preventDefault();
+    if (state.isLoginView) {
+      try {
+        dispatch({ type: START_FETCH });
+        const res = await axios.get(
+          "http://127.0.0.1:8000/authen/",
+          state.credentialLog,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        //cookiesに格納
+        props.cookies.set("current-token", res.data.token);
+        res.data.token
+          ? (window.location.href = "/profiles")
+          : (window.location.href = "/");
+        dispatch({ type: FETCH_SUCCESS });
+      } catch {
+        dispatch({ type: ERROR_CATCHED });
+      }
+    } else {
+      try {
+        dispatch({ type: START_FETCH });
+        const res = await axios.get(
+          "http://127.0.0.1:8000/api/user/create/",
+          state.credentialReg,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        dispatch({ type: FETCH_SUCCESS });
+        dispatch({ type: TOGGLE_MODE });
+      } catch {
+        dispatch({ type: ERROR_CATCHED });
+      }
+    }
+  };
+  const toggleView = () => {
+    dispatch({ type: TOGGLE_MODE });
+  };
   return <div></div>;
 };
 

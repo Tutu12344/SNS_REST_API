@@ -131,3 +131,39 @@
   outline: none;
   cursor: pointer;
 }
+h3 {
+  color: black;
+  font-family: "Comic Neue", cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+
+.list-item h4 {
+  color: lightgray;
+  font-family: "Comic Neue", cursive;
+}
+
+.btn-modal {
+  background-color: transparent;
+  color: gray;
+  margin-right: 7px;
+  font-size: 22px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.mail {
+  background-color: transparent;
+  color: lightgray;
+  margin-right: 25px;
+  font-size: 25px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

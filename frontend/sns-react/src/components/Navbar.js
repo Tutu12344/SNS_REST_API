@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ApiContext } from "../context/ApiContext";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = (props) => {
   const classes = useStyles();
+  const { askList, profiles } = useContext(ApiContext);
   const Logout = () => (event) => {
     props.cookies.remove("current-token");
     window.location.href = "/";
@@ -30,7 +32,20 @@ const Navbar = (props) => {
           <Typography variant="h5" className={classes.title}>
             SNS App
           </Typography>
-          <Badge className={classes.bg} badgeContent={3} color="secondary">
+          <Badge
+            className={classes.bg}
+            badgeContent={
+              askList.filter((ask) => {
+                return (
+                  ask.approved === false &&
+                  profiles.filter((item) => {
+                    return item.userPro === ask.askFrom;
+                  })[0]
+                );
+              }).length
+            }
+            color="secondary"
+          >
             <NotificationsIcon />
           </Badge>
           <button className="signOut" onClick={Logout()}>

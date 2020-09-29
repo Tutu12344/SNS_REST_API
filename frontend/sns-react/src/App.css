@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital@1display=swap");
 .App {
   text-align: center;
 }
@@ -94,4 +95,39 @@
   font-size: 22px;
   border: none;
   outline: none;
+}
+.photo {
+  background-color: transparent;
+  color: lightgray;
+  font-size: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.user {
+  background-color: transparent;
+  color: lightgray;
+  margin-left: 10px;
+  font-size: 26px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.user-invalid {
+  background-color: transparent;
+  color: dimgray;
+  margin-left: 10px;
+  font-size: 26px;
+  border: none;
+  outline: none;
+  cursor: none;
+}
+.trash {
+  background-color: transparent;
+  color: lightgray;
+  font-size: 24px;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }

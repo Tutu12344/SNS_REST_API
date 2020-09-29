@@ -176,7 +176,7 @@ const ApiContextProvider = (props) => {
   const changeApprovalRequest = async (uploadDataAsk, ask) => {
     try {
       const res = await axios.put(
-        `http://localhost:8000/api/user/approval/${ask.id}`,
+        `http://localhost:8000/api/user/approval/${ask.id}/`,
         uploadDataAsk,
         {
           headers: {
